@@ -6,7 +6,9 @@ class Product < ApplicationRecord
     validates :image
     validates :product_name
     validates :description
-    validates :price
+    with_options format: { with: /\A[\d]+\z/, message: 'Half-width number' } do
+      validates :price, numericality: { only_integer: true, greater_than: 299, less_than: 10000000, message: 'Out of setting range' }
+    end
   end
 
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -16,7 +18,7 @@ class Product < ApplicationRecord
   belongs_to :prefecture
   belongs_to :delivery_date
 
-  with_options numericality: { other_than: 1 } do
+  with_options numericality: { other_than: 1, message: 'Select' } do
     validates :category_id
     validates :condition_id
     validates :delivery_fee_id
