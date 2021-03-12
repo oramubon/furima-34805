@@ -62,8 +62,18 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("User must exist")
       end
-      it 'priceが半角数字でない場合は登録できない' do
+      it 'priceが全角文字の場合は登録できない' do
         @product.price = '１２３４'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price Out of setting range")
+      end
+      it 'priceが半角英数混合の場合は登録できない' do
+        @product.price = '1234test'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price Out of setting range")
+      end
+      it 'priceが半角英字場合は登録できない' do
+        @product.price = 'test'
         @product.valid?
         expect(@product.errors.full_messages).to include("Price Out of setting range")
       end
