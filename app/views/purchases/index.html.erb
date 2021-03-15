@@ -27,7 +27,7 @@
       </p>
     </div>
 
-    <%= form_with model: @purchase_address, id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
+    <%= form_with url: product_purchases_path, id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
     <div class='credit-card-form'>
       <h1 class='info-input-haedline'>
         クレジットカード情報入力
