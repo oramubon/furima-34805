@@ -6,6 +6,7 @@ class PurchasesController < ApplicationController
 
   def create
     @purchase = Purchase.create(purchase_params)
+    Address.create(address_params)
     if @purchase.valid?
       pay_product
       @purchase.save
@@ -19,6 +20,10 @@ class PurchasesController < ApplicationController
 
   def purchase_params
     params.require(:purchase).merge(user_id: current_user.id, product_id: @product.id, token: params[:token])
+  end
+
+  def address_params
+    params.permit(:post_code, :prefecture, :city, :address, :building, :phone_number).merge(purchase_id: @purchase.id)
   end
 
   def pay_product
