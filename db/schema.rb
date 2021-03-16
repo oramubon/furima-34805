@@ -63,10 +63,8 @@ ActiveRecord::Schema.define(version: 2021_03_15_131333) do
 
   create_table "purchases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "product_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_purchases_on_product_id"
     t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 
@@ -91,6 +89,5 @@ ActiveRecord::Schema.define(version: 2021_03_15_131333) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "purchases"
   add_foreign_key "products", "users"
-  add_foreign_key "purchases", "products"
   add_foreign_key "purchases", "users"
 end
