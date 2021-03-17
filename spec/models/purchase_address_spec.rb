@@ -64,11 +64,6 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Phone number Input only number")
       end
-      it 'phone_numberが10以下では保存できない' do
-        @purchase_address.phone_number = '0901234567'
-        @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Phone number Input only number")
-      end
       it 'user_idが空では保存できない' do
         @purchase_address.user_id = nil
         @purchase_address.valid?
